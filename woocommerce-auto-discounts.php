@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Auto Discounts for WooCommerce
- * Plugin URI: https://tommy-bordas.fr/
+ * Plugin URI: https://github.com/tommybds/auto-discounts-for-woocommerce
  * Description: Système de remises automatiques basé sur l'âge des produits pour WooCommerce
  * Version: 1.0.2
  * Author: Tommy Bordas
