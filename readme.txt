@@ -51,10 +51,20 @@ Oui, vous pouvez sélectionner les catégories à exclure dans les paramètres d
 
 == Changelog ==
 
+= 1.0.3 =
+* Sécurité: ajout et vérification de nonces (sauvegardes, AJAX, filtres)
+* Sécurité: assainissement des entrées (`$_GET`, `$_POST`) et échappement des sorties
+* Perf/Qualité: cache objet pour requêtes d’admin; annotations PHPCS
+* Compatibilité: WooCommerce testé jusqu’à 10.1.1; HPOS déclaré
+* Divers: Text domain unifié; readme et en-têtes conformes
+
 = 1.0.0 =
 * Version initiale
 
 == Upgrade Notice ==
+
+= 1.0.3 =
+Mise à jour recommandée: corrections de sécurité (nonces/escapes), compat WooCommerce 10.1.1, et optimisations.
 
 = 1.0.0 =
 Version initiale du plugin. 
