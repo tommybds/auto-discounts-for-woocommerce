@@ -2,7 +2,7 @@
 Contributors: tommybordas
 Tags: woocommerce, discounts, automatic, pricing, age-based
 Requires at least: 5.0
-Tested up to: 6.8
+Tested up to: 6.8.2
 Requires PHP: 7.2
 Stable tag: 1.0.2
 License: GPLv2 or later

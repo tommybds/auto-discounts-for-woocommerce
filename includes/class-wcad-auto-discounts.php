@@ -1199,19 +1199,22 @@ class WCAD_Auto_Discounts {
      * Affiche un message d'avertissement sur la page produit si le produit est exclu
      */
     public function show_exclusion_status_notice() {
-        // Notice informatif en admin; on assainit sans exiger de nonce
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Lecture de paramètres GET assainis et vérification de capacité; aucune écriture de données
-        if (isset($_GET['post']) && isset($_GET['action']) && sanitize_text_field(wp_unslash($_GET['action'])) === 'edit') {
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Lecture GET assainie; aucune écriture; contrôle de capacité juste après
-            $post_id = isset($_GET['post']) ? intval($_GET['post']) : 0;
-            if (! $post_id || ! current_user_can('edit_post', $post_id)) {
-                return;
-            }
-            $exclude = get_post_meta($post_id, '_wcad_exclude_from_discounts', true);
-            
-            if ($exclude === 'yes') {
-                echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html__('Ce produit est exclu des remises automatiques.', 'auto-discounts-for-woocommerce') . '</p></div>';
-            }
+        // Afficher la notice uniquement sur l'écran d'édition de produit (sans lire $_GET)
+        $screen = function_exists('get_current_screen') ? get_current_screen() : null;
+        if (! $screen || $screen->base !== 'post' || $screen->post_type !== 'product') {
+            return;
+        }
+        global $post;
+        if (! ($post instanceof \WP_Post)) {
+            return;
+        }
+        $post_id = (int) $post->ID;
+        if (! $post_id || ! current_user_can('edit_post', $post_id)) {
+            return;
+        }
+        $exclude = get_post_meta($post_id, '_wcad_exclude_from_discounts', true);
+        if ($exclude === 'yes') {
+            echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html__('Ce produit est exclu des remises automatiques.', 'auto-discounts-for-woocommerce') . '</p></div>';
         }
     }
 } 
